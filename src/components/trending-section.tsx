@@ -1,7 +1,8 @@
 import { styled } from "#styled-system/jsx/";
-import { MouseEvent, useRef, useState, TouchEvent } from "react";
+import { useRef } from "react";
 import { Movie } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
+import { useDraggable } from "react-use-draggable-scroll";
 
 interface TrendingMoviesSectionProps {
   movies: Movie[];
@@ -10,41 +11,13 @@ interface TrendingMoviesSectionProps {
 
 const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, onMovieClick }) => {
   const trendingMovies = movies.filter((movie) => movie.isTrending);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    const pageX = "touches" in e ? e.touches[0].pageX : e.pageX;
-    setStartX(pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-    scrollRef.current.style.cursor = "grabbing";
-    scrollRef.current.style.userSelect = "none";
-  };
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-    if (scrollRef.current) {
-      scrollRef.current.style.cursor = "grab";
-      scrollRef.current.style.removeProperty("user-select");
-    }
-  };
-
-  const handleDrag = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const pageX = "touches" in e ? e.touches[0].pageX : e.pageX;
-    const x = pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
+  const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+  const { events } = useDraggable(ref);
 
   const handleClick = (movie: Movie) => {
-    if (!isDragging && onMovieClick) {
+    if (onMovieClick) {
       onMovieClick(movie);
+      console.log(movie.id);
     }
   };
 
@@ -57,16 +30,7 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
   return (
     <TrendingContainer>
       <Title>Trending</Title>
-      <MovieScroller
-        ref={scrollRef}
-        onMouseDown={handleDragStart}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        onMouseMove={handleDrag}
-        onTouchStart={handleDragStart}
-        onTouchEnd={handleDragEnd}
-        onTouchMove={handleDrag}
-      >
+      <MovieScroller ref={ref} {...events}>
         {trendingMovies.map((movie) => (
           <MovieCard key={movie.id} onClick={() => handleClick(movie)}>
             <MovieImage>
@@ -127,7 +91,7 @@ const TrendingContainer = styled("div", {
 const MovieScroller = styled("div", {
   base: {
     display: "flex",
-    overflowX: "auto",
+    overflowX: "hidden",
     overflowY: "hidden",
     width: "100%",
     paddingBottom: 0,
@@ -135,11 +99,6 @@ const MovieScroller = styled("div", {
     md: {
       gap: "40px",
     },
-    scrollSnapType: "x mandatory",
-    "&::-webkit-scrollbar": {
-      display: "none",
-    },
-    scrollbarWidth: "none",
     cursor: "grab",
     userSelect: "none",
   },
