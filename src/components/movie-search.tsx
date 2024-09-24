@@ -3,7 +3,6 @@ import { Box, Grid, styled } from "#styled-system/jsx/";
 import { SearchIcon } from "./icons/search-icon";
 import { Movie, MovieCardProps } from "../types/movie";
 import MovieCard from "./movie-card";
-import { css } from "#styled-system/css/";
 
 interface MovieSearchProps {
   movies: Movie[];
@@ -38,9 +37,9 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
       </Box>
       {searchTerm && (
         <Box mt='4'>
-          <p className={css({ pb: "15px", textStyle: "h4", md: { textStyle: "h1" } })}>
+          <Heading>
             Found {searchResults.length} results for '{searchTerm}'
-          </p>
+          </Heading>
           <Grid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap='4'>
             {searchResults.map((movie) => {
               const movieCardProps: MovieCardProps = {
@@ -62,6 +61,14 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
     </Box>
   );
 };
+
+const Heading = styled("h1", {
+  base: {
+    pb: "15px",
+    textStyle: "h4",
+    md: { textStyle: "h1" },
+  },
+});
 
 const Input = styled("input", {
   base: {

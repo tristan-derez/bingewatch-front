@@ -4,6 +4,7 @@ import { MovieCardProps } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
 import { MovieIcon } from "./icons/movie-icon";
 import { TvShowIcon } from "./icons/tvserie-icon";
+import { styled } from "#styled-system/jsx/";
 
 const MovieCard = ({
   imageUrl,
@@ -12,7 +13,6 @@ const MovieCard = ({
   rating,
   title: movieTitle,
   isBookmarked: initialIsBookmarked,
-  size = "sm",
   srcSet,
 }: MovieCardProps): JSX.Element => {
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
@@ -33,8 +33,8 @@ const MovieCard = ({
   };
 
   return (
-    <div className={previewcard({ size })}>
-      <img src={imageUrl} srcSet={srcSet} alt={movieTitle} className={image({ size })} />
+    <PreviewCard>
+      <Image src={imageUrl} srcSet={srcSet} alt={movieTitle} />
       <div
         className={bookmarkIcon({ active: isBookmarked })}
         onClick={handleBookmarkClick}
@@ -43,18 +43,18 @@ const MovieCard = ({
         {isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
       </div>
 
-      <div className={content()}>
-        <div className={info()}>
+      <Content>
+        <Info>
           {year} • {getCategoryIcon()}
           {category} • {rating}
-        </div>
-        <h2 className={title()}>{movieTitle}</h2>
-      </div>
-    </div>
+        </Info>
+        <Title>{movieTitle}</Title>
+      </Content>
+    </PreviewCard>
   );
 };
 
-const previewcard = cva({
+const PreviewCard = styled("div", {
   base: {
     w: "100%",
     minW: "164px",
@@ -65,12 +65,9 @@ const previewcard = cva({
       cursor: "pointer",
     },
   },
-  defaultVariants: {
-    size: "md",
-  },
 });
 
-const image = cva({
+const Image = styled("img", {
   base: {
     w: "full",
     borderRadius: "lg",
@@ -80,18 +77,15 @@ const image = cva({
       opacity: "75%",
     },
   },
-  defaultVariants: {
-    size: "md",
-  },
 });
 
-const content = cva({
+const Content = styled("div", {
   base: {
     pt: "8px",
   },
 });
 
-const info = cva({
+const Info = styled("div", {
   base: {
     textStyle: "body",
     display: "flex",
@@ -101,7 +95,7 @@ const info = cva({
   },
 });
 
-const title = cva({
+const Title = styled("h4", {
   base: {
     m: 0,
     textStyle: "h4",

@@ -2,7 +2,6 @@ import { styled } from "#styled-system/jsx/";
 import { MouseEvent, useRef, useState, TouchEvent } from "react";
 import { Movie } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
-import { css } from "#styled-system/css/";
 
 interface TrendingMoviesSectionProps {
   movies: Movie[];
@@ -57,15 +56,7 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
 
   return (
     <TrendingContainer>
-      <h1
-        className={css({
-          textStyle: "h3",
-          mb: "24px",
-          md: { textStyle: "h1" },
-        })}
-      >
-        Trending
-      </h1>
+      <Title>Trending</Title>
       <MovieScroller
         ref={scrollRef}
         onMouseDown={handleDragStart}
@@ -109,6 +100,14 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
     </TrendingContainer>
   );
 };
+
+const Title = styled("h1", {
+  base: {
+    textStyle: "h3",
+    mb: "24px",
+    md: { textStyle: "h1" },
+  },
+});
 
 const TrendingContainer = styled("div", {
   base: {
