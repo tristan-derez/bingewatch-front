@@ -8,7 +8,8 @@ import { NavTvSerieIcon } from "./nav-icons/nav-tv-series-icon";
 function NavBar() {
   return (
     <Box
-      m='32px'
+      m={{ base: 0, md: 0, lg: "32px" }}
+      p={{ base: "32px", md: "32px", lg: 0 }}
       alignSelf={{ base: "flex-start", md: "center", lg: "flex-start" }}
       w={{ base: "100%", md: "100%", lg: "80px" }}
       position={{ lg: "fixed" }}

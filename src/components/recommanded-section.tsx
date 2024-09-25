@@ -8,7 +8,7 @@ interface RecommendedMoviesSectionProps {
 
 const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => {
   return (
-    <Box pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }}>
+    <Box pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }} pb={{ base: "40px", md: "32px", lg: 0 }}>
       <Title>Recommended for you</Title>
       <Grid
         gridTemplateColumns={{
