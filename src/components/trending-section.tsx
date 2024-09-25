@@ -61,7 +61,7 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
               </MovieImage>
             </MovieCard>
           ))}
-          <Box width='32px'></Box>
+          <Box width='32px' pr={{ base: "16px", md: "16px", lg: 0 }}></Box>
         </MovieScroller>
       </TrendingContainer>
     </>
