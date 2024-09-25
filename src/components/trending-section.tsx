@@ -1,4 +1,4 @@
-import { styled } from "#styled-system/jsx/";
+import { Box, styled } from "#styled-system/jsx/";
 import { useRef } from "react";
 import { Movie } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
@@ -28,40 +28,43 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
   };
 
   return (
-    <TrendingContainer>
-      <Title>Trending</Title>
-      <MovieScroller ref={ref} {...events}>
-        {trendingMovies.map((movie) => (
-          <MovieCard key={movie.id} onClick={() => handleClick(movie)}>
-            <MovieImage>
-              <img
-                src={movie.thumbnail.trending?.large}
-                alt={movie.title}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  pointerEvents: "none",
-                }}
-              />
-              <GradientOverlay />
-              <BookmarkButton
-                onClick={(e) => handleBookmarkClick(e, movie.id)}
-                title={movie.isBookmarked ? "Remove Bookmark" : "Add to Bookmark"}
-              >
-                {movie.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
-              </BookmarkButton>
-              <MovieInfo>
-                <MovieDetails>
-                  {movie.year} • {movie.category} • {movie.rating}
-                </MovieDetails>
-                <MovieTitle>{movie.title}</MovieTitle>
-              </MovieInfo>
-            </MovieImage>
-          </MovieCard>
-        ))}
-      </MovieScroller>
-    </TrendingContainer>
+    <>
+      <TrendingContainer>
+        <Title>Trending</Title>
+        <MovieScroller ref={ref} {...events}>
+          {trendingMovies.map((movie) => (
+            <MovieCard key={movie.id} onClick={() => handleClick(movie)}>
+              <MovieImage>
+                <img
+                  src={movie.thumbnail.trending?.large}
+                  alt={movie.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    pointerEvents: "none",
+                  }}
+                />
+                <GradientOverlay />
+                <BookmarkButton
+                  onClick={(e) => handleBookmarkClick(e, movie.id)}
+                  title={movie.isBookmarked ? "Remove Bookmark" : "Add to Bookmark"}
+                >
+                  {movie.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
+                </BookmarkButton>
+                <MovieInfo>
+                  <MovieDetails>
+                    {movie.year} • {movie.category} • {movie.rating}
+                  </MovieDetails>
+                  <MovieTitle>{movie.title}</MovieTitle>
+                </MovieInfo>
+              </MovieImage>
+            </MovieCard>
+          ))}
+          <Box width='32px'></Box>
+        </MovieScroller>
+      </TrendingContainer>
+    </>
   );
 };
 
@@ -79,11 +82,13 @@ const TrendingContainer = styled("div", {
     width: "100%",
     overflowX: "hidden",
     mt: "24px",
+    pl: "32px",
     md: {
       mt: "33px",
     },
     lg: {
       mt: "34px",
+      pl: 0,
     },
   },
 });

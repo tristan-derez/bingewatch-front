@@ -1,6 +1,6 @@
 import MovieCard from "./movie-card";
 import { Movie } from "../types/movie";
-import { Grid, styled } from "#styled-system/jsx/";
+import { Box, Grid, styled } from "#styled-system/jsx/";
 
 interface RecommendedMoviesSectionProps {
   movies: Movie[];
@@ -8,7 +8,7 @@ interface RecommendedMoviesSectionProps {
 
 const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => {
   return (
-    <>
+    <Box pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }}>
       <Title>Recommended for you</Title>
       <Grid
         gridTemplateColumns={{
@@ -39,7 +39,7 @@ const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => 
           />
         ))}
       </Grid>
-    </>
+    </Box>
   );
 };
 

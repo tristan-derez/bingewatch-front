@@ -25,7 +25,13 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
   }, [searchTerm, movies, onSearchActiveChange]);
 
   return (
-    <Box width='full' mt={{ base: "24px", md: "33px", lg: "64px" }} mb='0'>
+    <Box
+      width='full'
+      mt={{ base: "24px", md: "33px", lg: "64px" }}
+      mb='0'
+      pr='32px'
+      pl={{ base: "32px", md: "32px", lg: 0 }}
+    >
       <Box display='flex' alignItems='center' position='relative'>
         <SearchIcon height={34} width={34} color='white' />
         <Input
