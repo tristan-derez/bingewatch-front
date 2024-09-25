@@ -91,7 +91,7 @@ const TrendingContainer = styled("div", {
 const MovieScroller = styled("div", {
   base: {
     display: "flex",
-    overflowX: "hidden",
+    overflowX: "auto",
     overflowY: "hidden",
     width: "100%",
     paddingBottom: 0,
@@ -99,6 +99,10 @@ const MovieScroller = styled("div", {
     md: {
       gap: "40px",
     },
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    scrollbarWidth: "0",
     cursor: "grab",
     userSelect: "none",
   },
@@ -107,7 +111,10 @@ const MovieScroller = styled("div", {
 const MovieCard = styled("div", {
   base: {
     flexShrink: 0,
-    width: "470px",
+    width: "240px",
+    md: {
+      width: "470px",
+    },
     scrollSnapAlign: "start",
   },
 });
