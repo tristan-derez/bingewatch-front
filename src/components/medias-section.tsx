@@ -9,7 +9,11 @@ interface MediasSectionProps {
 
 const MediasSection = ({ medias, title }: MediasSectionProps) => {
   return (
-    <Box pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }} pb={{ base: "40px", md: "32px", lg: 0 }}>
+    <Box
+      pl={{ base: "16px", md: "32px", lg: 0 }}
+      pr={{ base: "16px", md: "32px" }}
+      pb={{ base: "40px", md: "32px", lg: 0 }}
+    >
       <Title>{title}</Title>
       <Grid
         gridTemplateColumns={{
@@ -17,7 +21,7 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
           md: "repeat(3, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
-        gap='24px'
+        gap={{ base: "15px", md: "24px" }}
         w='100%'
       >
         {medias.map((media) => (

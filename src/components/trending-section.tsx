@@ -92,9 +92,10 @@ const TrendingContainer = styled("div", {
     width: "100%",
     overflowX: "hidden",
     mt: "24px",
-    pl: "32px",
+    pl: "16px",
     md: {
       mt: "33px",
+      pl: "32px",
     },
     lg: {
       mt: "34px",

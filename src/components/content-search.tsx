@@ -28,8 +28,8 @@ const ContentSearch = () => {
         width='full'
         mt={{ base: "24px", md: "33px", lg: "55px" }}
         mb='0'
-        pr='32px'
-        pl={{ base: "32px", md: "32px", lg: 0 }}
+        pr={{ base: "16px", md: "32px" }}
+        pl={{ base: "16px", md: "32px", lg: 0 }}
       >
         <Box display='flex' alignItems='center' position='relative'>
           <InputWrapper>
