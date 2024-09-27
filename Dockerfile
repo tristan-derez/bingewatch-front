@@ -1,5 +1,5 @@
 # Use the official Bun image as a parent image
-FROM oven/bun:1 AS builder
+FROM oven/bun:1 as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,6 +16,9 @@ RUN bun run panda codegen
 # Build your app
 RUN bun run build
 
+# Copy public assets to the dist directory
+RUN cp -r public/* dist/
+
 # Use a smaller base image for the final stage
 FROM oven/bun:1-slim
 
@@ -31,4 +34,4 @@ RUN bun add serve
 EXPOSE 3000
 
 # Command to run the app
-CMD ["bun", "run", "serve", "-s", "dist", "-l", "3000"]
+CMD ["bun", "run", "serve", "dist", "-l", "3000"]
