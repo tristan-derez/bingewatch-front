@@ -24,7 +24,7 @@ function NavBar() {
   return (
     <Box
       m={{ base: 0, md: 0, lg: "32px" }}
-      p={{ base: "32px", md: "32px", lg: 0 }}
+      p={{ base: 0, md: "32px", lg: 0 }}
       alignSelf={{ base: "flex-start", md: "center", lg: "flex-start" }}
       w={{ base: "100%", md: "100%", lg: "80px" }}
       position={{ lg: "fixed" }}
@@ -35,7 +35,7 @@ function NavBar() {
         alignItems='center'
         bg='surface'
         h={{ base: "64px", lg: `calc(100vh - 64px)` }}
-        borderRadius='20px'
+        borderRadius={{ base: 0, md: "20px" }}
       >
         <Box px={{ base: "16px", md: "24px", lg: 0 }} pt={{ lg: "36px" }} pb={{ lg: "75px" }}>
           <LogoIcon />
