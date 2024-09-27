@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Box, Grid, styled } from "#styled-system/jsx/";
 import { SearchIcon } from "./icons/search-icon";
 import { Movie, MovieCardProps } from "../types/movie";
@@ -12,6 +12,7 @@ interface MovieSearchProps {
 const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (searchTerm) {
@@ -24,6 +25,20 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
     }
   }, [searchTerm, movies, onSearchActiveChange]);
 
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+      event.preventDefault();
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   return (
     <Box
       width='full'
@@ -33,13 +48,17 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
       pl={{ base: "32px", md: "32px", lg: 0 }}
     >
       <Box display='flex' alignItems='center' position='relative'>
-        <SearchIcon height={34} width={34} color='white' />
-        <Input
-          type='text'
-          placeholder='Search for movies or TV series'
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <InputWrapper>
+          <SearchIcon height={34} width={34} color='white' />
+          <Input
+            type='text'
+            placeholder='Search for movies or TV series.'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            ref={inputRef}
+          />
+        </InputWrapper>
+        <ShortcutIndicator>⌘K / Ctrl+K</ShortcutIndicator>
       </Box>
       {searchTerm && (
         <Box mt='4'>
@@ -77,6 +96,15 @@ const Heading = styled("h1", {
   },
 });
 
+const InputWrapper = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    position: "relative",
+    width: "100%",
+  },
+});
+
 const Input = styled("input", {
   base: {
     ml: "16px",
@@ -97,6 +125,18 @@ const Input = styled("input", {
       borderColor: "secondary",
     },
     borderRadius: "0",
+  },
+});
+
+const ShortcutIndicator = styled("span", {
+  base: {
+    position: "absolute",
+    right: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "gray.500",
+    fontSize: "sm",
+    pointerEvents: "none",
   },
 });
 
