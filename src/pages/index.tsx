@@ -1,5 +1,5 @@
 import ContentSearch from "#components/content-search.js";
-import RecommendedMoviesSection from "#components/recommanded-section.js";
+import MediasSection from "#components/medias-section.js";
 import TrendingMoviesSection from "#components/trending-section.js";
 import { useStore } from "../store/store";
 import { createFileRoute } from "@tanstack/react-router";
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const { medias, searchTerm } = useStore();
+  const { medias, searchTerm, getMediaTitle } = useStore();
 
   return (
     <>
@@ -17,7 +17,7 @@ function HomePage() {
       {!searchTerm && (
         <>
           <TrendingMoviesSection medias={medias} />
-          <RecommendedMoviesSection medias={medias} />
+          <MediasSection medias={medias} title={getMediaTitle()} />
         </>
       )}
     </>

@@ -11,9 +11,9 @@ interface AppState {
   searchResults: Media[];
   setCurrentPage: (page: PageName) => void;
   setSearchTerm: (term: string) => void;
-  getFilteredMedias: () => Media[];
+  getFilteredMedias: () => { movies: Media[]; tvSeries: Media[] };
   getSearchPlaceholder: () => string;
-  getRecommendedTitle: () => string;
+  getMediaTitle: () => string | string[];
 }
 
 export const useStore = create<AppState>((set, get) => ({
@@ -28,7 +28,6 @@ export const useStore = create<AppState>((set, get) => ({
     if (term) {
       let filteredMedias = medias;
 
-      // First, filter by current page context
       switch (currentPage) {
         case "movies":
           filteredMedias = filteredMedias.filter((media) => media.category === "Movie");
@@ -51,13 +50,25 @@ export const useStore = create<AppState>((set, get) => ({
     const { currentPage, medias } = get();
     switch (currentPage) {
       case "movies":
-        return medias.filter((media) => media.category === "Movie");
+        return {
+          movies: medias.filter((media) => media.category === "Movie"),
+          tvSeries: [],
+        };
       case "tvSeries":
-        return medias.filter((media) => media.category === "TV Series");
+        return {
+          movies: [],
+          tvSeries: medias.filter((media) => media.category === "TV Series"),
+        };
       case "bookmarks":
-        return medias.filter((media) => media.isBookmarked);
+        return {
+          movies: medias.filter((media) => media.isBookmarked && media.category === "Movie"),
+          tvSeries: medias.filter((media) => media.isBookmarked && media.category === "TV Series"),
+        };
       default:
-        return medias;
+        return {
+          movies: medias.filter((media) => media.category === "Movie"),
+          tvSeries: medias.filter((media) => media.category === "TV Series"),
+        };
     }
   },
   getSearchPlaceholder: () => {
@@ -68,12 +79,12 @@ export const useStore = create<AppState>((set, get) => ({
       case "tvSeries":
         return "Search for TV series";
       case "bookmarks":
-        return "Search bookmarked shows";
+        return "Search in bookmarks";
       default:
         return "Search for movies or TV series";
     }
   },
-  getRecommendedTitle: () => {
+  getMediaTitle: () => {
     const { currentPage } = get();
     switch (currentPage) {
       case "home":
@@ -83,7 +94,7 @@ export const useStore = create<AppState>((set, get) => ({
       case "tvSeries":
         return "TV Series";
       case "bookmarks":
-        return "Bookmarked Movies";
+        return ["Bookmarked Movies", "Bookmarked TV Series"];
       default:
         return "Recommended for you";
     }
