@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Movie } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
 import { useDraggable } from "react-use-draggable-scroll";
+import { useCategoryIcon } from "../hooks/use-category-icon";
 
 interface TrendingMoviesSectionProps {
   movies: Movie[];
@@ -54,7 +55,11 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
                 </BookmarkButton>
                 <MovieInfo>
                   <MovieDetails>
-                    {movie.year} • {movie.category} • {movie.rating}
+                    {movie.year} •{" "}
+                    <CategoryIconWrapper>
+                      <MovieCategoryIcon category={movie.category} />
+                    </CategoryIconWrapper>{" "}
+                    {movie.category} • {movie.rating}
                   </MovieDetails>
                   <MovieTitle>{movie.title}</MovieTitle>
                 </MovieInfo>
@@ -65,6 +70,11 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
       </TrendingContainer>
     </>
   );
+};
+
+const MovieCategoryIcon: React.FC<{ category: string }> = ({ category }) => {
+  const CategoryIcon = useCategoryIcon(category);
+  return CategoryIcon;
 };
 
 const Title = styled("h1", {
@@ -185,10 +195,22 @@ const MovieTitle = styled("p", {
   },
 });
 
-const MovieDetails = styled("p", {
+const MovieDetails = styled("div", {
   base: {
+    display: "flex",
     color: "gray.300",
     fontSize: "sm",
+  },
+});
+
+const CategoryIconWrapper = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    mx: "4px",
+    "& > svg": {
+      marginRight: "4px",
+    },
   },
 });
 

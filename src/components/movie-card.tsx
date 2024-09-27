@@ -2,9 +2,8 @@ import { cva } from "#styled-system/css";
 import { useState } from "react";
 import { MovieCardProps } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
-import { MovieIcon } from "./icons/movie-icon";
-import { TvShowIcon } from "./icons/tvserie-icon";
 import { styled } from "#styled-system/jsx/";
+import { useCategoryIcon } from "../hooks/use-category-icon";
 
 const MovieCard = ({
   imageUrl,
@@ -21,16 +20,7 @@ const MovieCard = ({
     setIsBookmarked((prevState) => !prevState);
   };
 
-  const getCategoryIcon = () => {
-    switch (category) {
-      case "Movie":
-        return <MovieIcon width={12} height={12} />;
-      case "TV Series":
-        return <TvShowIcon width={12} height={12} style={{ marginBottom: "1px" }} />;
-      default:
-        return null;
-    }
-  };
+  const CategoryIcon = useCategoryIcon(category);
 
   return (
     <PreviewCard>
@@ -45,7 +35,7 @@ const MovieCard = ({
 
       <Content>
         <Info>
-          {year} • {getCategoryIcon()}
+          {year} • {CategoryIcon}
           {category} • {rating}
         </Info>
         <Title>{movieTitle}</Title>
