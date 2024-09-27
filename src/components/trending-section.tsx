@@ -39,7 +39,7 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
                 <img
                   src={movie.thumbnail.trending?.large}
                   srcSet={`${movie.thumbnail.regular.small} 328w, ${movie.thumbnail.regular.medium} 440w, ${movie.thumbnail.regular.large} 560w`}
-                  sizes='(max-width: 640px) 328px, (max-width: 1024px) 440px, 560px'
+                  sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px'
                   alt={movie.title}
                   style={{
                     width: "100%",

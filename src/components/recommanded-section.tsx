@@ -31,7 +31,7 @@ const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => 
             rating={movie.rating}
             isBookmarked={movie.isBookmarked}
             isTrending={movie.isTrending}
-            sizes='(max-width: 640px) 328px, (max-width: 1024px) 440px, 560px'
+            sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px'
           />
         ))}
       </Grid>

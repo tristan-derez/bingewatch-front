@@ -53,7 +53,7 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
                 isTrending: movie.isTrending,
                 imageUrl: movie.thumbnail.regular.small,
                 srcSet: `${movie.thumbnail.regular.small} 328w, ${movie.thumbnail.regular.medium} 440w, ${movie.thumbnail.regular.large} 560w`,
-                sizes: "(max-width: 640px) 328px, (max-width: 1024px) 440px, 560px",
+                sizes: "(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px",
                 year: movie.year,
                 category: movie.category,
                 rating: movie.rating,
