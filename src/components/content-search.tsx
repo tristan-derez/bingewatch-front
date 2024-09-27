@@ -26,7 +26,7 @@ const ContentSearch = () => {
     <>
       <Box
         width='full'
-        mt={{ base: "24px", md: "33px", lg: "50px" }}
+        mt={{ base: "24px", md: "33px", lg: "55px" }}
         mb='0'
         pr='32px'
         pl={{ base: "32px", md: "32px", lg: 0 }}
