@@ -26,10 +26,12 @@ function NavBar() {
 
   return (
     <Box
-      m={{ base: 0, md: 0, lg: "32px" }}
+      m={{ base: 0, md: 0 }}
+      ml={{ lg: "32px" }}
+      mt={{ lg: "32px" }}
       p={{ base: 0, md: "32px", lg: 0 }}
       alignSelf={{ base: "flex-start", md: "center", lg: "flex-start" }}
-      w={{ base: "100%", md: "100%", lg: "80px" }}
+      w={{ base: "100%", md: "100%", lg: "96px" }}
       position={{ lg: "fixed" }}
       role='navigation'
     >
