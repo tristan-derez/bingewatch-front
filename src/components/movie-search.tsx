@@ -58,7 +58,7 @@ const MovieSearch = ({ movies, onSearchActiveChange }: MovieSearchProps) => {
             ref={inputRef}
           />
         </InputWrapper>
-        <ShortcutIndicator>⌘K / Ctrl+K</ShortcutIndicator>
+        <ShortcutIndicator>⌘K / CTRL+k</ShortcutIndicator>
       </Box>
       {searchTerm && (
         <Box mt='4'>
@@ -112,7 +112,7 @@ const Input = styled("input", {
       ml: "24px",
       textStyle: "h3",
     },
-    pr: "4",
+    pr: { base: "16px", md: "70px" },
     py: "2",
     width: "full",
     bg: "background",
@@ -131,12 +131,20 @@ const Input = styled("input", {
 const ShortcutIndicator = styled("span", {
   base: {
     position: "absolute",
+    color: "#FFFFF",
+    textStyle: "h4",
     right: "10px",
     top: "50%",
     transform: "translateY(-50%)",
-    color: "gray.500",
+    borderRadius: "4px",
+    backgroundColor: "gray.700",
+    p: "6px",
     fontSize: "sm",
     pointerEvents: "none",
+    display: "none",
+    md: {
+      display: "block",
+    },
   },
 });
 
