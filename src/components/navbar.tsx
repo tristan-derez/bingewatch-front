@@ -28,6 +28,7 @@ function NavBar() {
       alignSelf={{ base: "flex-start", md: "center", lg: "flex-start" }}
       w={{ base: "100%", md: "100%", lg: "80px" }}
       position={{ lg: "fixed" }}
+      role='navigation'
     >
       <Flex
         flexDir={{ base: "row", lg: "column" }}
