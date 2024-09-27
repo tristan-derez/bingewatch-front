@@ -26,6 +26,7 @@ const ContentSearch = () => {
     <>
       <Box
         width='full'
+        h='32px'
         mt={{ base: "24px", md: "33px", lg: "55px" }}
         mb='0'
         pr={{ base: "16px", md: "32px" }}
@@ -48,7 +49,7 @@ const ContentSearch = () => {
         </Box>
       </Box>
       {searchTerm && searchResults.length > 0 && (
-        <Box mt='4' pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }}>
+        <Box mt='32px' pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }}>
           <Heading>
             Found {searchResults.length} results for '{searchTerm}'
           </Heading>

@@ -68,6 +68,13 @@ const PreviewCard = styled("div", {
 const Image = styled("img", {
   base: {
     w: "full",
+    h: "110px",
+    md: {
+      h: "140px",
+    },
+    lg: {
+      h: "174px",
+    },
     borderRadius: "lg",
     objectFit: "cover",
     _hover: {

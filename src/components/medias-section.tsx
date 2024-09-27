@@ -21,7 +21,7 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
           md: "repeat(3, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
-        gap={{ base: "15px", md: "24px" }}
+        gap={{ base: "15px", md: "24px", lg: "40px" }}
         w='100%'
       >
         {medias.map((media) => (
