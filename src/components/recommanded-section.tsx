@@ -25,11 +25,7 @@ const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => 
             id={movie.id}
             title={movie.title}
             imageUrl={movie.thumbnail.regular.small}
-            srcSet={`
-              ${movie.thumbnail.regular.small} 300w, 
-              ${movie.thumbnail.regular.medium} 600w, 
-              ${movie.thumbnail.regular.large} 1440w,
-            `}
+            srcSet={` ${movie.thumbnail.regular.small} 328w, ${movie.thumbnail.regular.medium} 440w, ${movie.thumbnail.regular.large} 560w`}
             year={movie.year}
             category={movie.category}
             rating={movie.rating}
