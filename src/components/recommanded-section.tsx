@@ -1,15 +1,18 @@
 import MovieCard from "./movie-card";
 import { Movie } from "../types/movie";
 import { Box, Grid, styled } from "#styled-system/jsx/";
+import { useStore } from "../store/movies";
 
 interface RecommendedMoviesSectionProps {
   movies: Movie[];
 }
 
 const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => {
+  const { getRecommendedTitle } = useStore();
+
   return (
     <Box pr='32px' pl={{ base: "32px", md: "32px", lg: 0 }} pb={{ base: "40px", md: "32px", lg: 0 }}>
-      <Title>Recommended for you</Title>
+      <Title>{getRecommendedTitle()}</Title>
       <Grid
         gridTemplateColumns={{
           base: "repeat(auto-fit, minmax(164px, 1fr))",
@@ -20,19 +23,7 @@ const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => 
         w='100%'
       >
         {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            imageUrl={movie.thumbnail.regular.small}
-            srcSet={`${movie.thumbnail.regular.small} 328w, ${movie.thumbnail.regular.medium} 440w, ${movie.thumbnail.regular.large} 560w`}
-            year={movie.year}
-            category={movie.category}
-            rating={movie.rating}
-            isBookmarked={movie.isBookmarked}
-            isTrending={movie.isTrending}
-            sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px'
-          />
+          <MovieCard key={movie.id} {...movie} sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px' />
         ))}
       </Grid>
     </Box>

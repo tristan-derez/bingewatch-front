@@ -1,11 +1,11 @@
 export interface Thumbnail {
+  trending?: {
+    small: string;
+    large: string;
+  };
   regular: {
     small: string;
     medium: string;
-    large: string;
-  };
-  trending?: {
-    small: string;
     large: string;
   };
 }
@@ -21,17 +21,7 @@ export interface Movie {
   isTrending: boolean;
 }
 
-export type Size = "sm" | "md" | "lg";
-
-export interface MovieCardProps {
-  id: string;
-  title: string;
-  imageUrl: string;
-  year: number;
-  category: string;
-  rating: string;
-  isBookmarked: boolean;
-  isTrending: boolean;
-  sizes?: string;
+export interface MovieCardProps extends Movie {
   srcSet?: string;
+  sizes?: string;
 }

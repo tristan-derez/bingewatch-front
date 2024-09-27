@@ -6,12 +6,13 @@ import { styled } from "#styled-system/jsx/";
 import { useCategoryIcon } from "../hooks/use-category-icon";
 
 const MovieCard = ({
-  imageUrl,
+  title,
+  thumbnail,
   year,
   category,
   rating,
-  title: movieTitle,
   isBookmarked: initialIsBookmarked,
+  isTrending,
   srcSet,
   sizes,
 }: MovieCardProps): JSX.Element => {
@@ -23,9 +24,14 @@ const MovieCard = ({
 
   const CategoryIcon = useCategoryIcon(category);
 
+  const imageUrl = isTrending ? thumbnail.trending?.small : thumbnail.regular.small;
+
+  const finalSrcSet =
+    srcSet || `${thumbnail.regular.small} 328w, ${thumbnail.regular.medium} 440w, ${thumbnail.regular.large} 560w`;
+
   return (
     <PreviewCard>
-      <Image src={imageUrl} srcSet={srcSet} alt={movieTitle} sizes={sizes} />
+      <Image src={imageUrl} srcSet={finalSrcSet} alt={title} sizes={sizes} />
       <div
         className={bookmarkIcon({ active: isBookmarked })}
         onClick={handleBookmarkClick}
@@ -39,7 +45,7 @@ const MovieCard = ({
           {year} • {CategoryIcon}
           {category} • {rating}
         </Info>
-        <Title>{movieTitle}</Title>
+        <Title>{title}</Title>
       </Content>
     </PreviewCard>
   );
