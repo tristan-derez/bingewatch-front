@@ -107,7 +107,7 @@ const MovieScroller = styled("div", {
     "&::-webkit-scrollbar": {
       display: "none",
     },
-    scrollbarWidth: "0",
+    scrollbarWidth: "none",
     cursor: "grab",
     userSelect: "none",
   },

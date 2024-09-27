@@ -18,7 +18,7 @@ function NavBar() {
   };
 
   const getIconColor = (page: PageName) => {
-    return activePage === page ? "white" : "gray";
+    return activePage === page ? "white" : "greyishBlue";
   };
 
   return (
@@ -68,7 +68,7 @@ function NavBar() {
           px={{ base: "16px", md: "19px", lg: 0 }}
         >
           <UserButton>
-            <CircleUser size={32} color='gray' />
+            <CircleUser size={32} color='#5A698F' />
           </UserButton>
         </Flex>
       </Flex>
@@ -98,7 +98,7 @@ const NavButton = styled("button", {
       },
       false: {
         "& svg path": {
-          fill: "gray",
+          fill: "greyishBlue",
         },
         "@media (hover: hover)": {
           "&:hover": {
