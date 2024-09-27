@@ -1,4 +1,4 @@
-import { Box, styled } from "#styled-system/jsx/";
+import { styled } from "#styled-system/jsx/";
 import { useRef } from "react";
 import { Movie } from "../types/movie";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
@@ -61,7 +61,6 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
               </MovieImage>
             </MovieCard>
           ))}
-          <Box width='32px' pr={{ base: "16px", md: "16px", lg: 0 }}></Box>
         </MovieScroller>
       </TrendingContainer>
     </>
@@ -100,10 +99,6 @@ const MovieScroller = styled("div", {
     overflowY: "hidden",
     width: "100%",
     paddingBottom: 0,
-    gap: "16px",
-    md: {
-      gap: "40px",
-    },
     "&::-webkit-scrollbar": {
       display: "none",
     },
@@ -117,8 +112,10 @@ const MovieCard = styled("div", {
   base: {
     flexShrink: 0,
     width: "240px",
+    pr: "16px",
     md: {
       width: "470px",
+      pr: "32px",
     },
     scrollSnapAlign: "start",
   },
