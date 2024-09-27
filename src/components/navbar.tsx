@@ -46,16 +46,16 @@ function NavBar() {
           justify={{ base: "center", lg: "flex-start" }}
           gap={{ base: "24px", md: "32px", lg: "40px" }}
         >
-          <NavButton onClick={() => handleNavClick("home")}>
+          <NavButton onClick={() => handleNavClick("home")} active={activePage === "home"}>
             <HomeIcon color={getIconColor("home")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("movies")}>
+          <NavButton onClick={() => handleNavClick("movies")} active={activePage === "movies"}>
             <NavMovieIcon color={getIconColor("movies")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("tvSeries")}>
+          <NavButton onClick={() => handleNavClick("tvSeries")} active={activePage === "tvSeries"}>
             <NavTvSerieIcon color={getIconColor("tvSeries")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("bookmarks")}>
+          <NavButton onClick={() => handleNavClick("bookmarks")} active={activePage === "bookmarks"}>
             <NavBookMarkIcon color={getIconColor("bookmarks")} />
           </NavButton>
         </Flex>
@@ -83,15 +83,31 @@ const NavButton = styled("button", {
     cursor: "pointer",
     p: "8px",
     borderRadius: "8px",
-    "&:hover": {
-      "& svg:not(.circle-user) path": {
-        fill: "red",
-        transition: "fill 0.6s ease",
-      },
-    },
+    transition: "all 0.3s ease",
     "&:focus": {
       outline: "none",
       boxShadow: "0 0 0 2px secondary",
+    },
+  },
+  variants: {
+    active: {
+      true: {
+        "& svg path": {
+          fill: "white",
+        },
+      },
+      false: {
+        "& svg path": {
+          fill: "gray",
+        },
+        "@media (hover: hover)": {
+          "&:hover": {
+            "& svg path": {
+              fill: "red",
+            },
+          },
+        },
+      },
     },
   },
 });
