@@ -13,6 +13,7 @@ const MovieCard = ({
   title: movieTitle,
   isBookmarked: initialIsBookmarked,
   srcSet,
+  sizes,
 }: MovieCardProps): JSX.Element => {
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
 
@@ -24,7 +25,7 @@ const MovieCard = ({
 
   return (
     <PreviewCard>
-      <Image src={imageUrl} srcSet={srcSet} alt={movieTitle} />
+      <Image src={imageUrl} srcSet={srcSet} alt={movieTitle} sizes={sizes} />
       <div
         className={bookmarkIcon({ active: isBookmarked })}
         onClick={handleBookmarkClick}

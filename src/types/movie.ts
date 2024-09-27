@@ -32,6 +32,6 @@ export interface MovieCardProps {
   rating: string;
   isBookmarked: boolean;
   isTrending: boolean;
-  size?: Size;
+  sizes?: string;
   srcSet?: string;
 }
