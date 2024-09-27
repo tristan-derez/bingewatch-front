@@ -5,7 +5,7 @@ import { NavBookMarkIcon } from "./nav-icons/nav-bookmark-icon";
 import { NavMovieIcon } from "./nav-icons/nav-movie-icon";
 import { NavTvSerieIcon } from "./nav-icons/nav-tv-series-icon";
 import { CircleUser } from "lucide-react";
-import { useStore } from "../store/movies";
+import { useStore } from "../store/store";
 import { Link, useRouter } from "@tanstack/react-router";
 
 type PageName = "home" | "movies" | "tvSeries" | "bookmarks";

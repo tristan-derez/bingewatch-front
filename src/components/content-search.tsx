@@ -1,8 +1,8 @@
 import { useEffect, useRef, useCallback } from "react";
 import { Box, Grid, styled } from "#styled-system/jsx/";
 import { SearchIcon } from "./icons/search-icon";
-import MovieCard from "./movie-card";
-import { useStore } from "../store/movies";
+import MovieCard from "./content-card";
+import { useStore } from "../store/store";
 
 const ContentSearch = () => {
   const { searchTerm, searchResults, setSearchTerm, getSearchPlaceholder } = useStore();
@@ -44,7 +44,7 @@ const ContentSearch = () => {
               name='content-search'
             />
           </InputWrapper>
-          <ShortcutIndicator>⌘K / CTRL+k</ShortcutIndicator>
+          <ShortcutIndicator>⌘K / CTRL+K</ShortcutIndicator>
         </Box>
       </Box>
       {searchTerm && searchResults.length > 0 && (
@@ -54,7 +54,7 @@ const ContentSearch = () => {
           </Heading>
           <Grid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap='4'>
             {searchResults.map((movie) => (
-              <MovieCard key={movie.id} {...movie} sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px' />
+              <MovieCard key={movie.id} {...movie} />
             ))}
           </Grid>
         </Box>

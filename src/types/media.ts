@@ -10,7 +10,7 @@ export interface Thumbnail {
   };
 }
 
-export interface Movie {
+export interface Media {
   id: string;
   title: string;
   thumbnail: Thumbnail;
@@ -21,7 +21,7 @@ export interface Movie {
   isTrending: boolean;
 }
 
-export interface MovieCardProps extends Movie {
+export interface MediaCardProps extends Media {
   srcSet?: string;
   sizes?: string;
 }

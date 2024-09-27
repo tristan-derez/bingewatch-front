@@ -1,63 +1,63 @@
 import { create } from "zustand";
-import { Movie } from "../types/movie";
-import movieData from "../data.json";
+import { Media } from "../types/media";
+import mediaData from "../data.json";
 
 type PageName = "home" | "movies" | "tvSeries" | "bookmarks";
 
 interface AppState {
   currentPage: PageName;
-  movies: Movie[];
+  medias: Media[];
   searchTerm: string;
-  searchResults: Movie[];
+  searchResults: Media[];
   setCurrentPage: (page: PageName) => void;
   setSearchTerm: (term: string) => void;
-  getFilteredMovies: () => Movie[];
+  getFilteredMedias: () => Media[];
   getSearchPlaceholder: () => string;
   getRecommendedTitle: () => string;
 }
 
 export const useStore = create<AppState>((set, get) => ({
   currentPage: "home",
-  movies: movieData as Movie[],
+  medias: mediaData as Media[],
   searchTerm: "",
   searchResults: [],
   setCurrentPage: (page: PageName) => set({ currentPage: page }),
   setSearchTerm: (term: string) => {
     set({ searchTerm: term });
-    const { currentPage, movies } = get();
+    const { currentPage, medias } = get();
     if (term) {
-      let filteredMovies = movies;
+      let filteredMedias = medias;
 
       // First, filter by current page context
       switch (currentPage) {
         case "movies":
-          filteredMovies = filteredMovies.filter((movie) => movie.category === "Movie");
+          filteredMedias = filteredMedias.filter((media) => media.category === "Movie");
           break;
         case "tvSeries":
-          filteredMovies = filteredMovies.filter((movie) => movie.category === "TV Series");
+          filteredMedias = filteredMedias.filter((media) => media.category === "TV Series");
           break;
         case "bookmarks":
-          filteredMovies = filteredMovies.filter((movie) => movie.isBookmarked);
+          filteredMedias = filteredMedias.filter((media) => media.isBookmarked);
           break;
       }
 
-      const results = filteredMovies.filter((movie) => movie.title.toLowerCase().includes(term.toLowerCase()));
+      const results = filteredMedias.filter((media) => media.title.toLowerCase().includes(term.toLowerCase()));
       set({ searchResults: results });
     } else {
       set({ searchResults: [] });
     }
   },
-  getFilteredMovies: () => {
-    const { currentPage, movies } = get();
+  getFilteredMedias: () => {
+    const { currentPage, medias } = get();
     switch (currentPage) {
       case "movies":
-        return movies.filter((movie) => movie.category === "Movie");
+        return medias.filter((media) => media.category === "Movie");
       case "tvSeries":
-        return movies.filter((movie) => movie.category === "TV Series");
+        return medias.filter((media) => media.category === "TV Series");
       case "bookmarks":
-        return movies.filter((movie) => movie.isBookmarked);
+        return medias.filter((media) => media.isBookmarked);
       default:
-        return movies;
+        return medias;
     }
   },
   getSearchPlaceholder: () => {

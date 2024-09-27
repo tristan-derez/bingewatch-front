@@ -1,13 +1,13 @@
-import MovieCard from "./movie-card";
-import { Movie } from "../types/movie";
+import MovieCard from "./content-card";
+import { Media } from "../types/media";
 import { Box, Grid, styled } from "#styled-system/jsx/";
-import { useStore } from "../store/movies";
+import { useStore } from "../store/store";
 
-interface RecommendedMoviesSectionProps {
-  movies: Movie[];
+interface MediasSectionProps {
+  medias: Media[];
 }
 
-const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => {
+const MediasSection = ({ medias }: MediasSectionProps) => {
   const { getRecommendedTitle } = useStore();
 
   return (
@@ -22,8 +22,8 @@ const RecommendedMoviesSection = ({ movies }: RecommendedMoviesSectionProps) => 
         gap='24px'
         w='100%'
       >
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px' />
+        {medias.map((media) => (
+          <MovieCard key={media.id} {...media} sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px' />
         ))}
       </Grid>
     </Box>
@@ -39,4 +39,4 @@ const Title = styled("h1", {
   },
 });
 
-export default RecommendedMoviesSection;
+export default MediasSection;

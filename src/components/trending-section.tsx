@@ -1,46 +1,45 @@
 import { styled } from "#styled-system/jsx/";
 import { useRef } from "react";
-import { Movie } from "../types/movie";
+import { Media } from "../types/media";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useCategoryIcon } from "../hooks/use-category-icon";
 
-interface TrendingMoviesSectionProps {
-  movies: Movie[];
-  onMovieClick?: (movie: Movie) => void;
+interface TredingMediasSectionProps {
+  medias: Media[];
+  onMediaClick?: (media: Media) => void;
 }
 
-const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, onMovieClick }) => {
-  const trendingMovies = movies.filter((movie) => movie.isTrending);
+const TrendingMediasSection: React.FC<TredingMediasSectionProps> = ({ medias, onMediaClick }) => {
+  const trendingMedias = medias.filter((media) => media.isTrending);
   const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref);
 
-  const handleClick = (movie: Movie) => {
-    if (onMovieClick) {
-      onMovieClick(movie);
-      console.log(movie.id);
+  const handleClick = (media: Media) => {
+    if (onMediaClick) {
+      onMediaClick(media);
+      console.log(media.id);
     }
   };
 
-  const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>, movieId: string) => {
+  const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>, mediaId: string) => {
     e.stopPropagation();
-
-    console.log(movieId);
+    console.log(mediaId);
   };
 
   return (
     <>
       <TrendingContainer>
         <Title>Trending</Title>
-        <MovieScroller ref={ref} {...events}>
-          {trendingMovies.map((movie) => (
-            <MovieCard key={movie.id} onClick={() => handleClick(movie)}>
-              <MovieImage>
+        <MediaScroller ref={ref} {...events}>
+          {trendingMedias.map((media) => (
+            <MediaCard key={media.id} onClick={() => handleClick(media)}>
+              <MediaImage>
                 <img
-                  src={movie.thumbnail.trending?.large}
-                  srcSet={`${movie.thumbnail.regular.small} 328w, ${movie.thumbnail.regular.medium} 440w, ${movie.thumbnail.regular.large} 560w`}
+                  src={media.thumbnail.trending?.large}
+                  srcSet={`${media.thumbnail.regular.small} 328w, ${media.thumbnail.regular.medium} 440w, ${media.thumbnail.regular.large} 560w`}
                   sizes='(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px'
-                  alt={movie.title}
+                  alt={media.title}
                   style={{
                     width: "100%",
                     height: "100%",
@@ -50,25 +49,25 @@ const TrendingMoviesSection: React.FC<TrendingMoviesSectionProps> = ({ movies, o
                 />
                 <GradientOverlay />
                 <BookmarkButton
-                  onClick={(e) => handleBookmarkClick(e, movie.id)}
-                  title={movie.isBookmarked ? "Remove Bookmark" : "Add to Bookmark"}
+                  onClick={(e) => handleBookmarkClick(e, media.id)}
+                  title={media.isBookmarked ? "Remove Bookmark" : "Add to Bookmark"}
                 >
-                  {movie.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
+                  {media.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
                 </BookmarkButton>
-                <MovieInfo>
-                  <MovieDetails>
-                    {movie.year} •{" "}
+                <MediaInfo>
+                  <MediaDetails>
+                    {media.year} •{" "}
                     <CategoryIconWrapper>
-                      <MovieCategoryIcon category={movie.category} />
+                      <MovieCategoryIcon category={media.category} />
                     </CategoryIconWrapper>{" "}
-                    {movie.category} • {movie.rating}
-                  </MovieDetails>
-                  <MovieTitle>{movie.title}</MovieTitle>
-                </MovieInfo>
-              </MovieImage>
-            </MovieCard>
+                    {media.category} • {media.rating}
+                  </MediaDetails>
+                  <MediaTitle>{media.title}</MediaTitle>
+                </MediaInfo>
+              </MediaImage>
+            </MediaCard>
           ))}
-        </MovieScroller>
+        </MediaScroller>
       </TrendingContainer>
     </>
   );
@@ -104,7 +103,7 @@ const TrendingContainer = styled("div", {
   },
 });
 
-const MovieScroller = styled("div", {
+const MediaScroller = styled("div", {
   base: {
     display: "flex",
     overflowX: "auto",
@@ -120,7 +119,7 @@ const MovieScroller = styled("div", {
   },
 });
 
-const MovieCard = styled("div", {
+const MediaCard = styled("div", {
   base: {
     flexShrink: 0,
     width: "240px",
@@ -133,7 +132,7 @@ const MovieCard = styled("div", {
   },
 });
 
-const MovieImage = styled("div", {
+const MediaImage = styled("div", {
   base: {
     position: "relative",
     height: "230px",
@@ -177,7 +176,7 @@ const BookmarkButton = styled("button", {
   },
 });
 
-const MovieInfo = styled("div", {
+const MediaInfo = styled("div", {
   base: {
     position: "absolute",
     bottom: "0",
@@ -189,7 +188,7 @@ const MovieInfo = styled("div", {
   },
 });
 
-const MovieTitle = styled("p", {
+const MediaTitle = styled("p", {
   base: {
     color: "white",
     fontSize: "xl",
@@ -197,7 +196,7 @@ const MovieTitle = styled("p", {
   },
 });
 
-const MovieDetails = styled("div", {
+const MediaDetails = styled("div", {
   base: {
     display: "flex",
     color: "gray.300",
@@ -216,4 +215,4 @@ const CategoryIconWrapper = styled("span", {
   },
 });
 
-export default TrendingMoviesSection;
+export default TrendingMediasSection;

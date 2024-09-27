@@ -1,11 +1,11 @@
 import { cva } from "#styled-system/css";
 import { useState } from "react";
-import { MovieCardProps } from "../types/movie";
+import { MediaCardProps } from "../types/media";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
 import { styled } from "#styled-system/jsx/";
 import { useCategoryIcon } from "../hooks/use-category-icon";
 
-const MovieCard = ({
+const MediaCard = ({
   title,
   thumbnail,
   year,
@@ -14,8 +14,7 @@ const MovieCard = ({
   isBookmarked: initialIsBookmarked,
   isTrending,
   srcSet,
-  sizes,
-}: MovieCardProps): JSX.Element => {
+}: MediaCardProps): JSX.Element => {
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
 
   const handleBookmarkClick = () => {
@@ -28,6 +27,8 @@ const MovieCard = ({
 
   const finalSrcSet =
     srcSet || `${thumbnail.regular.small} 328w, ${thumbnail.regular.medium} 440w, ${thumbnail.regular.large} 560w`;
+
+  const sizes = `(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px`;
 
   return (
     <PreviewCard>
@@ -124,4 +125,4 @@ const bookmarkIcon = cva({
   },
 });
 
-export default MovieCard;
+export default MediaCard;
