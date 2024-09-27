@@ -46,16 +46,24 @@ function NavBar() {
           justify={{ base: "center", lg: "flex-start" }}
           gap={{ base: "24px", md: "32px", lg: "40px" }}
         >
-          <NavButton onClick={() => handleNavClick("home")} active={activePage === "home"}>
+          <NavButton onClick={() => handleNavClick("home")} active={activePage === "home"} aria-label='Home'>
             <HomeIcon color={getIconColor("home")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("movies")} active={activePage === "movies"}>
+          <NavButton onClick={() => handleNavClick("movies")} active={activePage === "movies"} aria-label='Movies'>
             <NavMovieIcon color={getIconColor("movies")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("tvSeries")} active={activePage === "tvSeries"}>
+          <NavButton
+            onClick={() => handleNavClick("tvSeries")}
+            active={activePage === "tvSeries"}
+            aria-label='tv series'
+          >
             <NavTvSerieIcon color={getIconColor("tvSeries")} />
           </NavButton>
-          <NavButton onClick={() => handleNavClick("bookmarks")} active={activePage === "bookmarks"}>
+          <NavButton
+            onClick={() => handleNavClick("bookmarks")}
+            active={activePage === "bookmarks"}
+            aria-label='bookmarks'
+          >
             <NavBookMarkIcon color={getIconColor("bookmarks")} />
           </NavButton>
         </Flex>
@@ -67,7 +75,7 @@ function NavBar() {
           py={{ base: "16px", md: "16px", lg: "32px" }}
           px={{ base: "16px", md: "19px", lg: 0 }}
         >
-          <UserButton>
+          <UserButton aria-label='User profile'>
             <CircleUser size={32} color='#5A698F' />
           </UserButton>
         </Flex>
@@ -84,6 +92,7 @@ const NavButton = styled("button", {
     p: "8px",
     borderRadius: "8px",
     transition: "all 0.3s ease",
+
     "&:focus": {
       outline: "none",
       boxShadow: "0 0 0 2px secondary",
