@@ -6,7 +6,7 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "300",
-      fontSize: "13px",
+      fontSize: "1.3rem",
       lineHeight: "auto",
       letterSpacing: "0",
       textDecoration: "None",
@@ -18,7 +18,7 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "300",
-      fontSize: "16px",
+      fontSize: "1.5rem",
       lineHeight: "auto",
       letterSpacing: "0",
       textDecoration: "None",
@@ -30,9 +30,9 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "300",
-      fontSize: "32px",
+      fontSize: "3.2rem",
       lineHeight: "auto",
-      letterSpacing: "-0.5px",
+      letterSpacing: "-0.05rem",
       textDecoration: "none",
       textTransform: "none",
     },
@@ -42,7 +42,7 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "300",
-      fontSize: "24px",
+      fontSize: "2.4rem",
       lineHeight: "auto",
       letterSpacing: "0",
       textDecoration: "none",
@@ -54,7 +54,7 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "500",
-      fontSize: "24px",
+      fontSize: "2.4rem",
       lineHeight: "auto",
       letterSpacing: "0",
       textDecoration: "none",
@@ -66,7 +66,7 @@ export const textStyles = defineTextStyles({
     value: {
       fontFamily: "outfit",
       fontWeight: "500",
-      fontSize: "18px",
+      fontSize: "1.8rem",
       lineHeight: "auto",
       letterSpacing: "0",
       textDecoration: "none",
