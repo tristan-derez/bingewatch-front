@@ -21,7 +21,8 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
           md: "repeat(3, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
-        gap={{ base: "15px", md: "24px", lg: "40px" }}
+        gridColumnGap={{ base: "15px", md: "30px", lg: "40px" }}
+        gridRowGap={{ base: "15px", md: "24px", lg: "32px" }}
         w='100%'
       >
         {medias.map((media) => (
@@ -34,9 +35,9 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
 
 const Title = styled("h1", {
   base: {
-    textStyle: "h3",
+    textStyle: "categoryTitle",
     my: "24px",
-    md: { textStyle: "h1", mt: "39px", mb: "24px" },
+    md: { mt: "39px", mb: "24px" },
     lg: { mt: "40px", mb: "24px" },
   },
 });
