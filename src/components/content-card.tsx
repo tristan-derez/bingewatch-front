@@ -1,40 +1,38 @@
 import { cva } from "#styled-system/css";
 import { useState } from "react";
-import { MovieCardProps } from "../types/movie";
+import { MediaCardProps } from "../types/media";
 import { BookmarkEmptyIcon, BookmarkFullIcon } from "./icons/bookmark-icons";
-import { MovieIcon } from "./icons/movie-icon";
-import { TvShowIcon } from "./icons/tvserie-icon";
 import { styled } from "#styled-system/jsx/";
+import { useCategoryIcon } from "../hooks/use-category-icon";
 
-const MovieCard = ({
-  imageUrl,
+const MediaCard = ({
+  title,
+  thumbnail,
   year,
   category,
   rating,
-  title: movieTitle,
   isBookmarked: initialIsBookmarked,
+  isTrending,
   srcSet,
-}: MovieCardProps): JSX.Element => {
+}: MediaCardProps): JSX.Element => {
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
 
   const handleBookmarkClick = () => {
     setIsBookmarked((prevState) => !prevState);
   };
 
-  const getCategoryIcon = () => {
-    switch (category) {
-      case "Movie":
-        return <MovieIcon width={12} height={12} />;
-      case "TV Series":
-        return <TvShowIcon width={12} height={12} style={{ marginBottom: "1px" }} />;
-      default:
-        return null;
-    }
-  };
+  const CategoryIcon = useCategoryIcon(category);
+
+  const imageUrl = isTrending ? thumbnail.trending?.small : thumbnail.regular.small;
+
+  const finalSrcSet =
+    srcSet || `${thumbnail.regular.small} 328w, ${thumbnail.regular.medium} 440w, ${thumbnail.regular.large} 560w`;
+
+  const sizes = `(max-width: 640px) 328px, (max-width: 1440px) 440px, 560px`;
 
   return (
     <PreviewCard>
-      <Image src={imageUrl} srcSet={srcSet} alt={movieTitle} />
+      <Image src={imageUrl} srcSet={finalSrcSet} alt={title} sizes={sizes} />
       <div
         className={bookmarkIcon({ active: isBookmarked })}
         onClick={handleBookmarkClick}
@@ -45,10 +43,10 @@ const MovieCard = ({
 
       <Content>
         <Info>
-          {year} • {getCategoryIcon()}
+          {year} • {CategoryIcon}
           {category} • {rating}
         </Info>
-        <Title>{movieTitle}</Title>
+        <Title>{title}</Title>
       </Content>
     </PreviewCard>
   );
@@ -70,6 +68,13 @@ const PreviewCard = styled("div", {
 const Image = styled("img", {
   base: {
     w: "full",
+    h: "110px",
+    md: {
+      h: "140px",
+    },
+    lg: {
+      h: "174px",
+    },
     borderRadius: "lg",
     objectFit: "cover",
     _hover: {
@@ -95,10 +100,10 @@ const Info = styled("div", {
   },
 });
 
-const Title = styled("h4", {
+const Title = styled("h2", {
   base: {
     m: 0,
-    textStyle: "h4",
+    textStyle: "titleInContent",
   },
 });
 
@@ -127,4 +132,4 @@ const bookmarkIcon = cva({
   },
 });
 
-export default MovieCard;
+export default MediaCard;

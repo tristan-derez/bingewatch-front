@@ -1,33 +1,39 @@
 import { Flex, Box, styled } from "#styled-system/jsx";
-import { useState } from "react";
 import { HomeIcon } from "./nav-icons/home-icon";
 import { LogoIcon } from "./nav-icons/logo-icon";
 import { NavBookMarkIcon } from "./nav-icons/nav-bookmark-icon";
 import { NavMovieIcon } from "./nav-icons/nav-movie-icon";
 import { NavTvSerieIcon } from "./nav-icons/nav-tv-series-icon";
 import { CircleUser } from "lucide-react";
+import { useStore } from "../store/store";
+import { Link, useRouter } from "@tanstack/react-router";
 
 type PageName = "home" | "movies" | "tvSeries" | "bookmarks";
 
 function NavBar() {
-  const [activePage, setActivePage] = useState<PageName>("home");
+  const { currentPage, setCurrentPage, setSearchTerm } = useStore();
+  const router = useRouter();
 
   const handleNavClick = (page: PageName) => {
-    setActivePage(page);
-    console.log(`${page} clicked`);
+    setCurrentPage(page);
+    setSearchTerm("");
+    router.navigate({ to: `/${page === "home" ? "" : page}` });
   };
 
-  const getIconColor = (page: PageName) => {
-    return activePage === page ? "white" : "greyishBlue";
+  const getIconColor = (page: string) => {
+    return currentPage === page ? "white" : "greyishBlue";
   };
 
   return (
     <Box
-      m={{ base: 0, md: 0, lg: "32px" }}
+      m={{ base: 0, md: 0 }}
+      ml={{ lg: "32px" }}
+      mt={{ lg: "32px" }}
       p={{ base: 0, md: "32px", lg: 0 }}
       alignSelf={{ base: "flex-start", md: "center", lg: "flex-start" }}
-      w={{ base: "100%", md: "100%", lg: "80px" }}
+      w={{ base: "100%", md: "100%", lg: "96px" }}
       position={{ lg: "fixed" }}
+      role='navigation'
     >
       <Flex
         flexDir={{ base: "row", lg: "column" }}
@@ -46,18 +52,26 @@ function NavBar() {
           justify={{ base: "center", lg: "flex-start" }}
           gap={{ base: "24px", md: "32px", lg: "40px" }}
         >
-          <NavButton onClick={() => handleNavClick("home")} active={activePage === "home"}>
-            <HomeIcon color={getIconColor("home")} />
-          </NavButton>
-          <NavButton onClick={() => handleNavClick("movies")} active={activePage === "movies"}>
-            <NavMovieIcon color={getIconColor("movies")} />
-          </NavButton>
-          <NavButton onClick={() => handleNavClick("tvSeries")} active={activePage === "tvSeries"}>
-            <NavTvSerieIcon color={getIconColor("tvSeries")} />
-          </NavButton>
-          <NavButton onClick={() => handleNavClick("bookmarks")} active={activePage === "bookmarks"}>
-            <NavBookMarkIcon color={getIconColor("bookmarks")} />
-          </NavButton>
+          <Link to='/' onClick={() => handleNavClick("home")}>
+            <NavButton active={currentPage === "home"} aria-label='Home'>
+              <HomeIcon color={getIconColor("home")} />
+            </NavButton>
+          </Link>
+          <Link to='/movies' onClick={() => handleNavClick("movies")}>
+            <NavButton active={currentPage === "movies"} aria-label='Movies'>
+              <NavMovieIcon color={getIconColor("movies")} />
+            </NavButton>
+          </Link>
+          <Link to='/tv-series' onClick={() => handleNavClick("tvSeries")}>
+            <NavButton active={currentPage === "tvSeries"} aria-label='tv series'>
+              <NavTvSerieIcon color={getIconColor("tvSeries")} />
+            </NavButton>
+          </Link>
+          <Link to='/bookmarks' onClick={() => handleNavClick("bookmarks")}>
+            <NavButton active={currentPage === "bookmarks"} aria-label='bookmarks'>
+              <NavBookMarkIcon color={getIconColor("bookmarks")} />
+            </NavButton>
+          </Link>
         </Flex>
 
         <Flex
@@ -67,9 +81,11 @@ function NavBar() {
           py={{ base: "16px", md: "16px", lg: "32px" }}
           px={{ base: "16px", md: "19px", lg: 0 }}
         >
-          <UserButton>
-            <CircleUser size={32} color='#5A698F' />
-          </UserButton>
+          <Link to='/user-profile'>
+            <UserButton aria-label='User profile'>
+              <CircleUser size={32} color='#5A698F' />
+            </UserButton>
+          </Link>
         </Flex>
       </Flex>
     </Box>
@@ -84,6 +100,7 @@ const NavButton = styled("button", {
     p: "8px",
     borderRadius: "8px",
     transition: "all 0.3s ease",
+
     "&:focus": {
       outline: "none",
       boxShadow: "0 0 0 2px secondary",
