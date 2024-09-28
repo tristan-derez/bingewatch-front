@@ -1,6 +1,7 @@
 import MovieCard from "./content-card";
 import { Media } from "../types/media";
 import { Box, Grid, styled } from "#styled-system/jsx/";
+import { css } from "#styled-system/css/";
 
 interface MediasSectionProps {
   medias: Media[];
@@ -10,6 +11,7 @@ interface MediasSectionProps {
 const MediasSection = ({ medias, title }: MediasSectionProps) => {
   return (
     <Box
+      pt={{ base: "24px", md: "40px" }}
       pl={{ base: "16px", md: "32px", lg: 0 }}
       pr={{ base: "16px", md: "32px" }}
       pb={{ base: "40px", md: "32px", lg: 0 }}
@@ -24,6 +26,11 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
         gridColumnGap={{ base: "15px", md: "30px", lg: "40px" }}
         gridRowGap={{ base: "15px", md: "24px", lg: "32px" }}
         w='100%'
+        className={css({
+          "@media (max-width: 370px)": {
+            gridTemplateColumns: "repeat(1, 1fr)",
+          },
+        })}
       >
         {medias.map((media) => (
           <MovieCard key={media.id} {...media} />
@@ -36,9 +43,10 @@ const MediasSection = ({ medias, title }: MediasSectionProps) => {
 const Title = styled("h1", {
   base: {
     textStyle: "categoryTitle",
-    my: "24px",
-    md: { mt: "39px", mb: "24px" },
-    lg: { mt: "40px", mb: "24px" },
+    pb: "24px",
+    lg: {
+      pb: "32px",
+    },
   },
 });
 

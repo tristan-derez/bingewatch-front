@@ -7,6 +7,7 @@ import { NavTvSerieIcon } from "./nav-icons/nav-tv-series-icon";
 import { CircleUser } from "lucide-react";
 import { useStore } from "../store/store";
 import { Link, useRouter } from "@tanstack/react-router";
+import { css } from "#styled-system/css/";
 
 type PageName = "home" | "movies" | "tvSeries" | "bookmarks";
 
@@ -41,6 +42,14 @@ function NavBar() {
         alignItems='center'
         bg='surface'
         h={{ base: "64px", lg: `calc(100vh - 64px)` }}
+        className={css({
+          "@media (min-width: 2000px)": {
+            maxH: "964px",
+            minH: "964px",
+            top: 0,
+            height: "full",
+          },
+        })}
         borderRadius={{ base: 0, md: "20px" }}
       >
         <Box px={{ base: "16px", md: "24px", lg: 0 }} pt={{ lg: "36px" }} pb={{ lg: "75px" }}>
