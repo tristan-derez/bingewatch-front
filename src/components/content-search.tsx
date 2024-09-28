@@ -67,8 +67,7 @@ const ContentSearch = () => {
 const Heading = styled("h1", {
   base: {
     pb: "15px",
-    textStyle: "h4",
-    md: { textStyle: "h1" },
+    textStyle: "categoryTitle",
   },
 });
 
@@ -86,8 +85,8 @@ const Input = styled("input", {
     ml: "16px",
     md: {
       ml: "24px",
-      textStyle: "h3",
     },
+    textStyle: "inputText",
     pr: { base: "16px", md: "70px" },
     py: "2",
     width: "full",
@@ -95,7 +94,6 @@ const Input = styled("input", {
     border: "none",
     borderBottom: "2px solid transparent",
     outline: "none",
-    textStyle: "inputText",
     transition: "border-color 0.8s ease-in-out",
     "&:focus": {
       borderColor: "secondary",
@@ -108,7 +106,8 @@ const ShortcutIndicator = styled("span", {
   base: {
     position: "absolute",
     color: "#FFFFF",
-    textStyle: "h4",
+    textStyle: "bodyM",
+    fontWeight: "bold",
     right: "10px",
     top: "50%",
     transform: "translateY(-50%)",

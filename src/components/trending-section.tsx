@@ -56,11 +56,13 @@ const TrendingMediasSection: React.FC<TredingMediasSectionProps> = ({ medias, on
                 </BookmarkButton>
                 <MediaInfo>
                   <MediaDetails>
-                    {media.year} •{" "}
+                    <p>{media.year} •</p>
                     <CategoryIconWrapper>
                       <MovieCategoryIcon category={media.category} />
-                    </CategoryIconWrapper>{" "}
-                    {media.category} • {media.rating}
+                    </CategoryIconWrapper>
+                    <p>
+                      {media.category} • {media.rating}
+                    </p>
                   </MediaDetails>
                   <MediaTitle>{media.title}</MediaTitle>
                 </MediaInfo>
@@ -80,9 +82,8 @@ const MovieCategoryIcon: React.FC<{ category: string }> = ({ category }) => {
 
 const Title = styled("h1", {
   base: {
-    textStyle: "h3",
+    textStyle: "categoryTitle",
     mb: "24px",
-    md: { textStyle: "h1" },
   },
 });
 
@@ -192,20 +193,19 @@ const MediaInfo = styled("div", {
 const MediaTitle = styled("p", {
   base: {
     color: "white",
-    fontSize: "xl",
-    fontWeight: "bold",
+    textStyle: "titleTrending",
   },
 });
 
 const MediaDetails = styled("div", {
   base: {
     display: "flex",
-    color: "gray.300",
-    fontSize: "sm",
+    color: "white",
+    textStyle: "body",
   },
 });
 
-const CategoryIconWrapper = styled("span", {
+const CategoryIconWrapper = styled("div", {
   base: {
     display: "inline-flex",
     alignItems: "center",

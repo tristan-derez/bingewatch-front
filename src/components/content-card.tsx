@@ -100,10 +100,10 @@ const Info = styled("div", {
   },
 });
 
-const Title = styled("h4", {
+const Title = styled("h2", {
   base: {
     m: 0,
-    textStyle: "h4",
+    textStyle: "titleInContent",
   },
 });
 
